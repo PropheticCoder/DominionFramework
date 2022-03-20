@@ -8,6 +8,7 @@ namespace libraries;
  * @version 1.0
  */
 class ConfigTool{
+    private $Host="localhost/";
     protected static function extract(string $config,string $setting){
         return parse_ini_file("../../ConfigTool/Configs/{$config}.ini")[$setting];
     }
