@@ -1,12 +1,12 @@
 <?php
 namespace App;
-
-use libraries\ConfigTool;
-
+/**
+ * Extract Config
+ */
 final class Config{
     public static function extract(string $setting){
         $DocumentRoot = $_SERVER['DOCUMENT_ROOT'] . "/DominionFramework";
-        $ConfigDir = $DocumentRoot . "/.App/Config/.env";
+        $ConfigDir = $DocumentRoot . "/.env";
         return parse_ini_file($ConfigDir)[$setting];
     }
 }
