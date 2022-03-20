@@ -1,0 +1,5 @@
+Log start time:  2022-02-12 05:38:04
+session_id         : 85odes84ileae1j6fjod4129hn
+2022-02-12 05:38:04 -> Console wriite log executed!
+2022-02-12 05:38:42 -> Console wriite log executed!
+2022-02-12 05:38:49 -> Console wriite log executed!
