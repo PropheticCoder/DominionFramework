@@ -75,26 +75,32 @@ abstract class Request{
         return true;
     }
 
-    static protected function extractParameterNamesFromRoute(string $route) {
-        $RouteParameters=array();
-        $reConcat="";
-        $Parameters=explode("{",$route);
-        foreach($Parameters as $ParameterString) {
-            $reConcat .=$ParameterString;
-        } 
-        $Parameters =explode("}",$reConcat);
-        $reConcat="";
-        foreach ($Parameters as $ParameterString) {
-            $reConcat .= $ParameterString;
+    static protected function extractParameterNamesFromRoute(string $route) : array{
+        $parameters=[];
+        $brokenRoute = explode("/", $route);
+        $newRouteString = "";
+        //Remove empty space and model name
+        foreach ($brokenRoute as $brokenRouteStringKey => $brokenRouteString) {
+            if ($brokenRouteString == "" || ucfirst($brokenRouteString) == ucfirst(self::getModelFromRoute($route))) {
+                unset($brokenRoute[$brokenRouteStringKey]);
+                continue;
+            }
+            $newRouteString .= $brokenRouteString;
         }
-        $Parameters = explode("/", $reConcat);
-        $reConcat = "";
-        foreach ($Parameters as $ParameterString) {
-            if ($ParameterString == "") continue;
-            if($ParameterString == self::getModelFromRoute($route)) continue;
-            array_push($RouteParameters,$ParameterString);
+
+        $brokenNewRoute = explode("{", $newRouteString);
+        $newRouteString = "";
+        foreach ($brokenNewRoute as $brokenRouteStringKey => $brokenRouteString) {
+            $newRouteString .= $brokenRouteString;
         }
-        return $RouteParameters;
+
+        $brokenNewRoute = explode("}", $newRouteString);
+        $newRouteString = "";
+        foreach ($brokenNewRoute as $brokenRouteStringKey => $brokenRouteString) {
+            if ($brokenRouteString != "") array_push($parameters, $brokenRouteString);
+            $newRouteString .= $brokenRouteString;
+        }
+        return $parameters;
     }
     abstract static protected function callable(string $route);
 }

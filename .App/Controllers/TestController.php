@@ -1,9 +1,7 @@
 <?php
 namespace App\Controllers;
+use App\Models\TestModel;
 
-use App\Interfaces\Controller;
-
-class TestController{
-    
+class TestController extends TestModel{
 }
 ?>
